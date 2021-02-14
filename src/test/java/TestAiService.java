@@ -36,7 +36,6 @@ public class TestAiService {
         boardService.setBoardCellValue(new Coordinates(0,1), this.playerTwo);
 
         coordinateService.setCoordinates(simpleAi.generateNextMove());
-        coordinateService.areNotValidCoordinates();
 
         assertEquals(this.boardService.getBoard()[0][2], CELL_EMPTY_CHARACTER);
 

@@ -13,30 +13,24 @@ public class CoordinateService {
         this.boardService = boardService;
     }
 
-    public void setCoordinates(String coordinatesString) {
+    public boolean setCoordinates(String coordinatesString) {
         try {
             String[] coordinates = coordinatesString.split(CommonValues.COORDINATE_SEPARATOR);
             int y = Integer.parseInt(coordinates[0]);
             int x = Integer.parseInt(coordinates[1]);
+
+            if (coordinatesNotOutOfBounds(this.boardService.getBoard(), y, x)) {
+                return false;
+            }
             this.coordinates = new Coordinates(y, x);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid Coordinates");
+            return false;
         }
+        return true;
     }
 
     public Coordinates getCoordinates() {
         return coordinates;
-    }
-
-    public boolean areNotValidCoordinates() {
-        if (this.coordinates == null) {
-            throw new IllegalStateException("Coordinates not Set");
-        }
-
-        return coordinatesNotOutOfBounds(this.boardService.getBoard(),
-                coordinates.getY(),
-                coordinates.getX()
-        );
     }
 
     private boolean coordinatesNotOutOfBounds(String[][] board, int y, int x) {

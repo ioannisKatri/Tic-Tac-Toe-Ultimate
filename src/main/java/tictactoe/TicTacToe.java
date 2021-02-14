@@ -39,17 +39,17 @@ public class TicTacToe {
             System.out.println();
             String playerInput = this.playerManagerService.getPlayerNextMove();
             verifyIfUserWantsToExit(playerInput);
-            coordinateService.setCoordinates(playerInput);
+            boolean success = coordinateService.setCoordinates(playerInput);
+            boolean isCellEmpty = GameUtils.isCellEmpty(board, coordinateService.getCoordinates());
 
-            if (coordinateService.areNotValidCoordinates()) {
-                ConsoleMessagesUtils.enterANumberBetween(board.length - 1);
-                this.boardService.printBoard();
+            if (!success) {
+                printErrorMessageAndBoard(board);
                 return false;
             }
-            boolean isCellEmpty = GameUtils.isCellEmpty(board, coordinateService.getCoordinates());
 
             if (!isCellEmpty) {
                 ConsoleMessagesUtils.theCellIsOccupied();
+                this.boardService.printBoard();
             } else {
                 this.boardService.setBoardCellValue(coordinateService.getCoordinates(), this.playerManagerService.getCurrentPlayer());
                 this.boardService.printBoard();
@@ -58,14 +58,20 @@ public class TicTacToe {
                     return true;
                 }
                 this.playerManagerService.pointToNextPlayer();
-                return false;
             }
             ConsoleMessagesUtils.enterCoordinates(playerManagerService.getCurrentPlayer().getSymbol());
 
         } catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e ) {
-            ConsoleMessagesUtils.enterANumberBetween(board.length - 1);
+            printErrorMessageAndBoard(board);
         }
         return false;
+    }
+
+    private void printErrorMessageAndBoard(String[][] board){
+        ConsoleMessagesUtils.enterANumberBetween(board.length - 1);
+        System.out.println();
+        this.boardService.printBoard();
+        ConsoleMessagesUtils.enterCoordinates(playerManagerService.getCurrentPlayer().getSymbol());
     }
 
     private void verifyIfUserWantsToExit(String str) {
