@@ -42,6 +42,10 @@ mvn exec:java -Dexec.mainClass=Main
 - Minimum size of board is 3x3
 - Write `exit` to exit the game
 
+###### Player input Sequence Diagram
+![Player input Sequence Diagram](https://i.ibb.co/DM3rdjr/Player-Input.png)
+Link [here](https://swimlanes.io/u/_NMfi_vYD).
+
 ### How to play
 
 #### Example of 3x3 board
