@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class WinnerCalculatorService implements IWinnerCalculator{
+public class WinnerCalculatorService implements IWinnerCalculator {
     private final IBoardService boardService;
     private final Map<String, Player> allSymbols;
 
@@ -21,26 +21,52 @@ public class WinnerCalculatorService implements IWinnerCalculator{
     @Override
     public String findWinner() {
         String[][] board = this.boardService.getBoard();
+        int row;
+        int column;
+        String current;
+        String next;
 
         for (int i = 0; i < board.length; i++) {
+
             if (i == 0) {
+                row = 1;
+                column = 1;
+                current = board[0][0];
+                next = board[1][1];
+
                 if (containsSymbol(board[0][0])
-                        && isWinnerDiagonalTopLeftBottomRight(1, 1, board[0][0], board[1][1], 0)) {
+                        && isWinnerDiagonalTopLeftBottomRight(row, column, current, next, 0)) {
                     return board[0][0];
                 }
 
+                row = board.length - 2;
+                column = 1;
+                current = board[board.length - 1][0];
+                next = board[board.length - 2][1];
+
                 if (containsSymbol(board[board.length - 1][0])
-                        && isWinnerDiagonalBottomLeftTopRight( board.length - 2, 1, board[board.length - 1][0], board[board.length - 2][1], 0)) {
+                        && isWinnerDiagonalBottomLeftTopRight(row, column, current, next, 0)) {
                     return board[board.length - 1][0];
                 }
             }
 
+            row = i;
+            column = 1;
+            current = board[i][0];
+            next = board[i][1];
+
             if (containsSymbol(board[i][0])
-                    && isWinnerHorizontal(i, 1, board[i][0], board[i][1], 0)) {
+                    && isWinnerHorizontal(row, column, current, next, 0)) {
                 return board[i][0];
             }
+
+            row = 1;
+            column = i;
+            current = board[0][i];
+            next = board[1][i];
+
             if (containsSymbol(board[0][i])
-                    && isWinnerVertical(1, i, board[0][i], board[1][i], 0)) {
+                    && isWinnerVertical(row, column, current, next, 0)) {
                 return board[0][i];
             }
         }
