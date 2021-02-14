@@ -42,7 +42,7 @@ mvn exec:java -Dexec.mainClass=Main
 - Minimum size of board is 3x3
 - Write `exit` to exit the game
 
-####How to play
+#### How to play
 
 #### Example of 3x3 board
 
@@ -63,10 +63,10 @@ mvn exec:java -Dexec.mainClass=Main
 | _ _ _ | <br>
 
 
-####Other
+#### Other
 - Temporarily limitation of board size up to 10x10
 
-####ToDo
+#### ToDo
 - Advanced AI.
 - More Testing, current coverage 88%.
 - Verify that every player has a different symbol.
