@@ -37,7 +37,6 @@ mvn exec:java -Dexec.mainClass=Main
 #### Additional information
 - Variables must be provided in a specific order. A `config_example.txt` is provided. 
 - If extra players needs to change `NUM_OF_PLAYERS=3` and add more `PLAYER2` with their corresponding symbol.
-- AI always plays at the end of each round.
 - Coordinate 0,0 always start from top-left.
 - Minimum size of board is 3x3
 - Write `exit` to exit the game

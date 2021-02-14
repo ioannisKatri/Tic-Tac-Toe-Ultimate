@@ -4,6 +4,7 @@ import tictactoe.config.models.Player;
 import tictactoe.config.utils.ConfigurationUtils;
 
 import java.io.*;
+import java.util.Random;
 
 import static tictactoe.config.utils.CommonValues.CELL_EMPTY_CHARACTER;
 
@@ -38,7 +39,11 @@ public class GameConfiguration {
             String getAiCharacter = reader.readLine();
             addPlayerAi(getAiCharacter);
 
-            for (int index = 0; index < this.players.length - 1; index++) {
+            for (int index = 0; index < this.players.length; index++) {
+                if (this.players[index] != null) {
+                    continue;
+                }
+
                 line = reader.readLine();
                 if (line == null) {
                     throw new IllegalArgumentException("Player value is missing please check documentation");
@@ -61,10 +66,13 @@ public class GameConfiguration {
     private void addPlayerAi(String line) {
         String playerSymbol = ConfigurationUtils.extractValue(line, "COMPUTER_CHARACTER");
 
+        Random ran = new Random();
+        int index = ran.nextInt(this.players.length);
+
         if (playerSymbol.length() != 1 || playerSymbol.equals(CELL_EMPTY_CHARACTER)) {
             throw new IllegalArgumentException("COMPUTER_CHARACTER" + " Computer Symbol value must be one character and not " + CELL_EMPTY_CHARACTER);
         }
-        this.players[this.players.length - 1] = new Player(playerSymbol, true);
+        this.players[index] = new Player(playerSymbol, true);
     }
 
     private void addPlayer(String line, int index) {
