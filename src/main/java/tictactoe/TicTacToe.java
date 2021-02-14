@@ -40,12 +40,12 @@ public class TicTacToe {
             String playerInput = this.playerManagerService.getPlayerNextMove();
             verifyIfUserWantsToExit(playerInput);
             boolean success = coordinateService.setCoordinates(playerInput);
-            boolean isCellEmpty = GameUtils.isCellEmpty(board, coordinateService.getCoordinates());
 
             if (!success) {
                 printErrorMessageAndBoard(board);
                 return false;
             }
+            boolean isCellEmpty = GameUtils.isCellEmpty(board, coordinateService.getCoordinates());
 
             if (!isCellEmpty) {
                 ConsoleMessagesUtils.theCellIsOccupied();
