@@ -24,7 +24,7 @@ mvn exec:java -Dexec.mainClass=Main
 
 ### Tic-Tac-Toe Configuration
 - Under `src/main/resources` path the configuration file `config.txt` can be found.
-- The application is `config.txt` in order to initialize.
+- The application requires `config.txt` in order to set up.
   
 #### Configuration file Variables
 
